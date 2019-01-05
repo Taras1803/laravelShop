@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -70,15 +71,15 @@ class Categorie extends Model
 
     static function getCatalogData()
     {
-        $data['categories'] = Categorie::all();
-        $data['products'] = Product::all();
+        $data['categories'] = Categorie::where('status','=','on')->get();
+        $data['products'] = Product::where('status','=','on')->paginate(Config::get('settings.product_per_page'));
         return $data;
     }
     static function getCategoryData($slug)
     {
         $category = Categorie::where('slug', $slug)->first();
         $data['category_description'] = $category->getCategoryDescription->description;
-        $products = $category->products;
+        $products = $category->products()->paginate(Config::get('settings.product_per_page'));
         foreach ($products as $key => $product){
             $products[$key]['material'] = $product->getMaterial->name;
         }

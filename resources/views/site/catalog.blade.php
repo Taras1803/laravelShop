@@ -29,6 +29,7 @@
                         @endforeach
 
                     </div>
+                    {{ $data['products']->render() }}
                 </div>
             </div>
         </section>

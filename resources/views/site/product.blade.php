@@ -27,7 +27,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                                <div class="product_description">
+                                    {{$data['product']->product_description}}
+                                </div>
 
                     </div>
                 </div>
