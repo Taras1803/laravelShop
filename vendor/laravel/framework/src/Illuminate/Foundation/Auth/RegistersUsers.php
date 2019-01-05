@@ -2,7 +2,6 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -29,7 +28,6 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
@@ -37,7 +35,8 @@ trait RegistersUsers
         $this->guard()->login($user);
 
         if($request->js && $request->js == 'js_register'){
-            return response()->json('ok');
+            $json['error'] = 0;
+            return response()->json($json);
         }
 
         return $this->registered($request, $user)

@@ -1,5 +1,6 @@
 {{-- image column type --}}
 @php
+
   $value = data_get($entry, $column['name']);
 
   if (is_array($value)) {

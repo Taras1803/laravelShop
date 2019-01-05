@@ -7,7 +7,7 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class Categorie extends Model
+class Material extends Model
 {
     use CrudTrait;
 
@@ -17,11 +17,11 @@ class Categorie extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'categories';
+    protected $table = 'materials';
      protected $primaryKey = 'id';
      public $timestamps = true;
      protected $guarded = ['id'];
-    protected $fillable = ['image', 'status','slug','title'];
+    protected $fillable = ['image', 'status','slug','name'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -30,19 +30,11 @@ class Categorie extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public static function boot()
-    {
-        parent::boot();
-        static::deleting(function($obj) {
-            Storage::disk('public')->delete($obj->image);
-        });
-    }
-
     public function setImageAttribute($value)
     {
         $attribute_name = "image";
         $disk = "public";
-        $destination_path = "/uploads/categories";
+        $destination_path = "/uploads/materials";
 
         // if the image was erased
         if ($value==null) {
@@ -67,39 +59,14 @@ class Categorie extends Model
             $this->attributes[$attribute_name] = $destination_path.'/'.$filename;
         }
     }
-
-    static function getCatalogData()
-    {
-        $data['categories'] = Categorie::all();
-        $data['products'] = Product::all();
-        return $data;
-    }
-    static function getCategoryData($slug)
-    {
-        $category = Categorie::where('slug', $slug)->first();
-        $data['category_description'] = $category->getCategoryDescription->description;
-        $products = $category->products;
-        foreach ($products as $key => $product){
-            $products[$key]['material'] = $product->getMaterial->name;
-        }
-        $data['categories'] = Categorie::all();
-        $data['products'] = $products;
-        return $data;
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function getCategoryDescription()
+    public function product()
     {
-        return $this->hasOne('App\Models\CategoriesDescription',  'parent_id');
-
-    }
-    public function products()
-    {
-        return $this->hasMany('App\Models\Product',  'category_id');
+        return $this->belongsTo('App\Models\Product', 'id');
 
     }
     /*

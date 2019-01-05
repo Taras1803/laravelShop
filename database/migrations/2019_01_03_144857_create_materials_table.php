@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesDescriptionsTable extends Migration
+class CreateMaterialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateCategoriesDescriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories_descriptions', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug')->unique();
             $table->integer('parent_id');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('parent_id');
+            $table->string('name')->unique();
+            $table->enum('status',['on','off']);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCategoriesDescriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories_descriptions');
+        Schema::dropIfExists('materials');
     }
 }

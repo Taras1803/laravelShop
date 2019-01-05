@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Categorie;
-use App\Models\CategoriesDescription;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\CategorieRequest as StoreRequest;
-use App\Http\Requests\CategorieRequest as UpdateRequest;
-use Illuminate\Support\Facades\Session;
+use App\Http\Requests\MaterialRequest as StoreRequest;
+use App\Http\Requests\MaterialRequest as UpdateRequest;
 
 /**
- * Class CategorieCrudController
+ * Class MaterialCrudController
  * @package App\Http\Controllers\Admin
  * @property-read CrudPanel $crud
  */
-class CategorieCrudController extends CrudController
+class MaterialCrudController extends CrudController
 {
     public function setup()
     {
@@ -25,9 +22,9 @@ class CategorieCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Categorie');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/categorie');
-        $this->crud->setEntityNameStrings('categorie', 'categories');
+        $this->crud->setModel('App\Models\Material');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/material');
+        $this->crud->setEntityNameStrings('material', 'materials');
 
         /*
         |--------------------------------------------------------------------------
@@ -44,12 +41,12 @@ class CategorieCrudController extends CrudController
             [
                 'label' => 'Name',
                 'type' => 'text',
-                'name' => 'title'
+                'name' => 'name',
             ],
             [
-                'name' => 'status',
+                'label' => 'Status',
                 'type' => 'enum',
-                'label' => 'Category status'
+                'name' => 'status',
             ],
         ]);
 
@@ -65,15 +62,8 @@ class CategorieCrudController extends CrudController
             [
                 'label' => 'Name',
                 'type' => 'text',
-                'name' => 'title',
-            ],
-            [
-                'label' => 'Description',
-                'type' => 'wysiwyg',
-                'name' => 'description',
-                'entity'    => 'getCategoryDescription',
-                'attribute' => 'description',
-                'model'     => 'App\Models\CategoriesDescription',
+                'name' => 'name',
+
             ],
             [
                 'name' => 'slug',
@@ -86,14 +76,14 @@ class CategorieCrudController extends CrudController
                 'type' => 'enum',
             ],
         ],'update/create/both');
-        // add asterisk for fields that are required in CategorieRequest
+
+        // add asterisk for fields that are required in MaterialRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
     }
 
     public function store(StoreRequest $request)
     {
-
         // your additional operations before save here
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
@@ -108,16 +98,5 @@ class CategorieCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
-    }
-    public function destroy($id)
-    {
-        $this->crud->hasAccessOrFail('delete');
-        $products = Categorie::find($id)->products;
-        if(count($products) > 0){
-            return  redirect()->back();
-        }else{
-            CategoriesDescription::where(['parent_id' => $id])->delete();
-            return $this->crud->delete($id);
-        }
     }
 }

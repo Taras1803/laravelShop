@@ -18,7 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::group(['middleware' => 'web', 'prefix' => config('backpack.base.route_prefix')], function () {
-//    Route::auth();
-//    Route::get('logout', 'Auth\LoginController@logout');
-//});
+
+
+
+Route::get('/catalog', 'SiteController@index');
+Route::get('/category/{slug}', 'CatalogController@category');
+Route::get('/product/{slug}', 'CatalogController@product');
+
+

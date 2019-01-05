@@ -106,7 +106,8 @@ trait AuthenticatesUsers
         $this->clearLoginAttempts($request);
 
         if($request->js && $request->js == 'js_register'){
-            return response()->json('ok');
+            $json['error'] = 0;
+            return response()->json($json);
         }
 
         return $this->authenticated($request, $this->guard()->user())

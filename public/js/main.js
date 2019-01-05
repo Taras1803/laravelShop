@@ -21,13 +21,13 @@ var formSend = (function () {
         var request = $.ajax({url: ajaxAction, data: formData, type: 'post', dataType: 'json'});
 
         request.done(function (response) {
-            if (response != 'ok') {
+            if (response.error != 0) {
                 var errors = response.original.errors;
                 $.each(errors, function(key, value){
                     $('#' + key).next().show().find('strong').html(value);
                 })
             } else {
-                window.location = '/';
+                window.location = '/catalog';
             }
         });
     };
