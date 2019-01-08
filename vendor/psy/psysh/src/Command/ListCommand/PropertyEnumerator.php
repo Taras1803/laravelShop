@@ -120,7 +120,7 @@ class PropertyEnumerator extends Enumerator
         if ($reflector->isInterface()) {
             return 'Interface Properties';
         } elseif (\method_exists($reflector, 'isTrait') && $reflector->isTrait()) {
-            return 'Trait Properties';
+            return 'Traits Properties';
         } else {
             return 'Class Properties';
         }

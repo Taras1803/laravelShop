@@ -18,3 +18,4 @@ Route::group([
     CRUD::resource('product', 'ProductCrudController');
     CRUD::resource('material', 'MaterialCrudController');
 }); // this should be the absolute last line of this file
+

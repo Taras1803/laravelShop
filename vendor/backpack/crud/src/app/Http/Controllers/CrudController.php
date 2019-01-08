@@ -52,5 +52,6 @@ class CrudController extends BaseController
      */
     public function setup()
     {
+
     }
 }

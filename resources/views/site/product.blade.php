@@ -15,7 +15,6 @@
                                             <a href="">
                                                 <img src="{{$data['product']->image}}" alt="">
                                             </a>
-                                            <span class="cf-bag"></span>
                                             <span class="cf-wishlist cf-wishlist_fill"></span>
                                         </div>
                                         <div class="product__description">

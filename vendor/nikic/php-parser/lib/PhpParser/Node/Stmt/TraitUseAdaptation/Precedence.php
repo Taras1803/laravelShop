@@ -12,7 +12,7 @@ class Precedence extends Node\Stmt\TraitUseAdaptation
     /**
      * Constructs a trait use precedence adaptation node.
      *
-     * @param Node\Name              $trait       Trait name
+     * @param Node\Name              $trait       Traits name
      * @param string|Node\Identifier $method      Method name
      * @param Node\Name[]            $insteadof   Overwritten traits
      * @param array                  $attributes  Additional attributes

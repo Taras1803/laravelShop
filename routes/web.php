@@ -25,4 +25,6 @@ Route::get('/catalog', 'SiteController@index');
 Route::get('/category/{slug}', 'CatalogController@category');
 Route::get('/product/{slug}', 'CatalogController@product');
 
+Route::post('media-dropzone', ['uses' => 'ProductCrudController@handleDropzoneUpload']);
+
 

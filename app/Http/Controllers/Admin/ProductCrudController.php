@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\ProductsDescription;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
@@ -16,6 +19,8 @@ use App\Http\Requests\ProductRequest as UpdateRequest;
  */
 class ProductCrudController extends CrudController
 {
+
+
     public function setup()
     {
         /*
@@ -34,10 +39,21 @@ class ProductCrudController extends CrudController
         */
 
         $this->crud->setColumns([
+//            [
+//                'label' => 'Image',
+//                'type' => 'images',
+//                'name' => 'images',
+//                'height' => '60px',
+//                'width' => '60px',
+//
+//            ],
             [
                 'label' => 'Image',
                 'type' => 'image',
                 'name' => 'image',
+                'height' => '60px',
+                'width' => '60px',
+
             ],
             [
                 'label' => 'Name',
@@ -77,13 +93,21 @@ class ProductCrudController extends CrudController
             ],
         ]);
         $this->crud->addFields([
+//            [ // image
+//                'label' => "Images",
+//                'name' => "images",
+//                'type' => 'image_multiple',
+//                'upload' => true,
+//                'crop' => false, // set to true to allow cropping, false to disable
+//                'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+//            ],
             [
-                'label' => "Product Image",
+                'label' => "Image",
                 'name' => "image",
                 'type' => 'image',
                 'upload' => true,
-                'aspect_ratio' => 0, // set to 0 to allow any aspect ratio
                 'crop' => false, // set to true to allow cropping, false to disable
+                'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
             ],
             [
                 'label' => 'Name',
@@ -137,6 +161,7 @@ class ProductCrudController extends CrudController
                 'type' => 'number',
             ],
         ],'update/create/both');
+
         // add asterisk for fields that are required in ProductRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
@@ -144,7 +169,33 @@ class ProductCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
-        // your additional operations before save here
+        // Setup storage
+        $attribute_name = "images";
+        $disk = "public";
+        $destination_path = "/uploads/products";
+        // Then get images from request
+        $input = $request->all();
+        $images = $input[$attribute_name];
+        $imageArray = [];
+        // Now iterate images
+        foreach ($images as $value) {
+            // Store on disk and add to array
+            if (starts_with($value, 'data:image'))
+            {
+                // 0. Make the image
+                $image = Image::make($value);
+                // 1. Generate a filename.
+                $filename = md5($value.time()).'.jpg';
+                // 2. Store the image on disk.
+                Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
+                // 3. Save the path to the database
+                array_push($imageArray, $destination_path.'/'.$filename);
+            }
+        }
+        // Update $request with new array
+        $request->request->set($attribute_name, $imageArray);
+
+        // Save $request
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -153,6 +204,33 @@ class ProductCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
+        // Setup storage
+        $attribute_name = "images";
+        $disk = "public";
+        $destination_path = "/uploads/products";
+        // Then get images from request
+        $input = $request->all();
+        $images = $input[$attribute_name];
+        $imageArray = [];
+        // Now iterate images
+        foreach ($images as $value) {
+            // Store on disk and add to array
+            if (starts_with($value, 'data:image'))
+            {
+                // 0. Make the image
+                $image = Image::make($value);
+                // 1. Generate a filename.
+                $filename = md5($value.time()).'.jpg';
+                // 2. Store the image on disk.
+                Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
+                // 3. Save the path to the database
+                array_push($imageArray, $destination_path.'/'.$filename);
+            } else {
+                array_push($imageArray, $value);
+            }
+        }
+        // Update $request with new array
+        $request->request->set($attribute_name, implode('|',$imageArray));
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
@@ -166,4 +244,5 @@ class ProductCrudController extends CrudController
         ProductsDescription::where(['parent_id' => $id])->delete();
         return $this->crud->delete($id);
     }
+
 }

@@ -294,7 +294,7 @@ class Generator
         if (!\trait_exists($traitName, $callAutoload)) {
             throw new RuntimeException(
                 \sprintf(
-                    'Trait "%s" does not exist.',
+                    'Traits "%s" does not exist.',
                     $traitName
                 )
             );
@@ -352,7 +352,7 @@ class Generator
         if (!\trait_exists($traitName, $callAutoload)) {
             throw new RuntimeException(
                 \sprintf(
-                    'Trait "%s" does not exist.',
+                    'Traits "%s" does not exist.',
                     $traitName
                 )
             );

@@ -26,8 +26,9 @@
         @include('crud::inc.field_translatable_icon')
     </div>
     <!-- Wrap the image or canvas element with a block element (container) -->
+
     <div class="row">
-        <div class="col-sm-6" style="margin-bottom: 20px;">
+        <div class="col-sm-4" style="margin-bottom: 20px;">
             <img id="mainImage" src="{{ $image_url }}">
         </div>
         @if(isset($field['crop']) && $field['crop'])

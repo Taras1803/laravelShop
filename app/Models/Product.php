@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +23,7 @@ class Product extends Model
      protected $primaryKey = 'id';
      public $timestamps = true;
      protected $guarded = ['id'];
-    protected $fillable = ['image', 'status','slug','price','action_price','action','title','category_id'];
+    protected $fillable = ['images', 'status','slug','price','action_price','action','title','category_id'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -38,34 +40,41 @@ class Product extends Model
         });
     }
 
-    public function setImageAttribute($value)
+
+    public function updateImageOrder($order) {
+        $new_images_attribute = [];
+
+        foreach ($order as $key => $image) {
+            $new_images_attribute[$image['id']] = $image['path'];
+        }
+        $new_images_attribute = json_encode($new_images_attribute);
+
+        $this->attributes['images'] = $new_images_attribute;
+        $this->save();
+    }
+
+    public function removeImage($image_id, $image_path, $disk)
     {
-        $attribute_name = "image";
+        // delete the image from the db
+        $images = json_encode(array_except($this->images, [$image_id]));
+        $this->attributes['images'] = $images;
+        $this->save();
+
+        // delete the image from the folder
+        if (Storage::disk($disk)->has($image_path)) {
+            Storage::disk($disk)->delete($image_path);
+        }
+    }
+
+
+    public function setImagesAttribute($value)
+    {
+
+        $attribute_name = "images";
         $disk = "public";
-        $destination_path = "/uploads/products";
+        $destination_path = "uploads/products";
 
-        // if the image was erased
-        if ($value==null) {
-            // delete the image from disk
-            Storage::disk($disk)->delete($this->{$attribute_name});
-
-            // set null in the database column
-            $this->attributes[$attribute_name] = null;
-        }
-
-        // if a base64 was sent, store it in the db
-        if (starts_with($value, 'data:image'))
-        {
-
-            // 0. Make the image
-            $image = Image::make($value);
-            // 1. Generate a filename.
-            $filename = md5($value.time()).'.jpg';
-            // 2. Store the image on disk.
-            Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
-            // 3. Save the path to the database
-            $this->attributes[$attribute_name] = $destination_path.'/'.$filename;
-        }
+        $this->attributes[$attribute_name] = $value;
     }
     /*
     |--------------------------------------------------------------------------
@@ -85,6 +94,11 @@ class Product extends Model
     public function getMaterial()
     {
         return $this->belongsTo('App\Models\Material', 'material_id','id');
+    }
+
+   public function getMainImage(){
+        $image = explode('|', $this->images);
+        return $image[0];
     }
 
     static function getProductData($slug)

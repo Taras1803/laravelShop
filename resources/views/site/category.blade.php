@@ -4,6 +4,9 @@
     <section class="container">
         <section class="catalog">
             <div class="container">
+                <div class="category_description">
+                    {{$data['category_description']}}
+                </div>
                 <div class="catalog__content">
                     <div class="items-line__items items-line__items--four">
 
@@ -15,7 +18,6 @@
                                             <a href="/product/{{$product->slug}}">
                                                 <img src="{{$product->image}}" alt="">
                                             </a>
-                                            <span class="cf-bag"></span>
                                             <span class="cf-wishlist cf-wishlist_fill"></span>
                                         </div>
                                         <div class="product__description">

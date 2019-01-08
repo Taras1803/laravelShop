@@ -15,7 +15,6 @@
                                             <a href="product/{{$product->slug}}">
                                                 <img src="{{$product->image}}" alt="">
                                             </a>
-                                            <span class="cf-bag"></span>
                                             <span class="cf-wishlist cf-wishlist_fill"></span>
                                         </div>
                                         <div class="product__description">

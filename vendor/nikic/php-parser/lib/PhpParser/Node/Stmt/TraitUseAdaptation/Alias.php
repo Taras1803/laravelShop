@@ -14,7 +14,7 @@ class Alias extends Node\Stmt\TraitUseAdaptation
     /**
      * Constructs a trait use precedence adaptation node.
      *
-     * @param null|Node\Name              $trait       Trait name
+     * @param null|Node\Name              $trait       Traits name
      * @param string|Node\Identifier      $method      Method name
      * @param null|int                    $newModifier New modifier
      * @param null|string|Node\Identifier $newName     New name
