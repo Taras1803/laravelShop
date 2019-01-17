@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Product;
+use Zend\Diactoros\Request;
 
 class CatalogController extends Controller
 {
@@ -19,4 +20,6 @@ class CatalogController extends Controller
         $data = Product::getProductData($slug);
         return view('site/product', compact('data'));
     }
+
+
 }

@@ -24,7 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/catalog', 'SiteController@index');
 Route::get('/category/{slug}', 'CatalogController@category');
 Route::get('/product/{slug}', 'CatalogController@product');
+Route::resource('/products_attribute', 'AjaxProductsAttributeController');
+Route::resource('/products_to_attribute', 'AjaxProductsToAttributeController');
 
-Route::post('media-dropzone', ['uses' => 'ProductCrudController@handleDropzoneUpload']);
 
+Route::get('{page}/{subs?}', ['uses' => 'PageController@index'])
+    ->where(['page' => '^((?!admin).)*$', 'subs' => '.*']);
 

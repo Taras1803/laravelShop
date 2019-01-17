@@ -39,22 +39,22 @@ class ProductCrudController extends CrudController
         */
 
         $this->crud->setColumns([
-//            [
-//                'label' => 'Image',
-//                'type' => 'images',
-//                'name' => 'images',
-//                'height' => '60px',
-//                'width' => '60px',
-//
-//            ],
             [
                 'label' => 'Image',
-                'type' => 'image',
-                'name' => 'image',
+                'type' => 'images',
+                'name' => 'images',
                 'height' => '60px',
                 'width' => '60px',
 
             ],
+//            [
+//                'label' => 'Image',
+//                'type' => 'image',
+//                'name' => 'image',
+//                'height' => '60px',
+//                'width' => '60px',
+//
+//            ],
             [
                 'label' => 'Name',
                 'type' => 'text',
@@ -93,22 +93,22 @@ class ProductCrudController extends CrudController
             ],
         ]);
         $this->crud->addFields([
-//            [ // image
-//                'label' => "Images",
-//                'name' => "images",
-//                'type' => 'image_multiple',
-//                'upload' => true,
-//                'crop' => false, // set to true to allow cropping, false to disable
-//                'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
-//            ],
-            [
-                'label' => "Image",
-                'name' => "image",
-                'type' => 'image',
+            [ // image
+                'label' => "Images",
+                'name' => "images",
+                'type' => 'image_multiple',
                 'upload' => true,
                 'crop' => false, // set to true to allow cropping, false to disable
                 'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
             ],
+//            [
+//                'label' => "Image",
+//                'name' => "image",
+//                'type' => 'image',
+//                'upload' => true,
+//                'crop' => false, // set to true to allow cropping, false to disable
+//                'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+//            ],
             [
                 'label' => 'Name',
                 'type' => 'text',
@@ -159,6 +159,12 @@ class ProductCrudController extends CrudController
                 'name' => 'action',
                 'label' => 'Action',
                 'type' => 'number',
+            ],
+            [
+
+                'label' => 'Attributes',
+                'type' => 'product_attribute',
+                'name' => 'attribute',
             ],
         ],'update/create/both');
 
@@ -230,6 +236,11 @@ class ProductCrudController extends CrudController
             }
         }
         // Update $request with new array
+
+        foreach($imageArray as $key => $value){
+            if($value == null) unset($imageArray[$key]);
+        }
+
         $request->request->set($attribute_name, implode('|',$imageArray));
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);

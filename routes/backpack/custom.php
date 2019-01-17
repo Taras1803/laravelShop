@@ -17,5 +17,7 @@ Route::group([
     CRUD::resource('categorie', 'CategorieCrudController');
     CRUD::resource('product', 'ProductCrudController');
     CRUD::resource('material', 'MaterialCrudController');
-}); // this should be the absolute last line of this file
+    CRUD::resource('products_attribute', 'Products_attributeCrudController');
 
+}); // this should be the absolute last line of this file
+//Route::post('/save-value-to-attribute', 'Products_attributeCrudController@saveValueAttribute');

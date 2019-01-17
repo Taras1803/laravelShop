@@ -8,6 +8,7 @@
         <li><a href='{{ backpack_url('categorie') }}'><i class='fa  fa-reorder'></i> <span>Categories</span></a></li>
         <li><a href='{{ backpack_url('product') }}'><i class='fa  fa-reorder'></i> <span>Products</span></a></li>
         <li><a href='{{ backpack_url('material') }}'><i class='fa fa-reorder'></i> <span>Materials</span></a></li>
+        <li><a href='{{ backpack_url('products_attribute') }}'><i class='fa fa-reorder'></i> <span>Product attributes</span></a></li>
     </ul>
 </li>
 <li class="treeview">
@@ -19,3 +20,4 @@
     </ul>
 </li>
 <li><a href="{{ url(config('backpack.base.route_prefix').'/page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
+

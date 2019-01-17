@@ -23,7 +23,7 @@ class Product extends Model
      protected $primaryKey = 'id';
      public $timestamps = true;
      protected $guarded = ['id'];
-    protected $fillable = ['images', 'status','slug','price','action_price','action','title','category_id'];
+    protected $fillable = ['images', 'image','status','slug','price','action_price','action','title','category_id'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -95,10 +95,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Material', 'material_id','id');
     }
+    public function attributes()
+    {
+        return $this->belongsToMany('App\Models\Products_attribute','products_to_attributes','product_id','attribute_id')->withPivot( 'attribute_id','product_id','attribute_value_id');
 
-   public function getMainImage(){
-        $image = explode('|', $this->images);
-        return $image[0];
     }
 
     static function getProductData($slug)
