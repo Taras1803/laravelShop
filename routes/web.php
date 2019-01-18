@@ -26,6 +26,7 @@ Route::get('/category/{slug}', 'CatalogController@category');
 Route::get('/product/{slug}', 'CatalogController@product');
 Route::resource('/products_attribute', 'AjaxProductsAttributeController');
 Route::resource('/products_to_attribute', 'AjaxProductsToAttributeController');
+Route::post('/get-attribute-values', 'AjaxProductsToAttributeController@actionGetAttributeValues');
 
 
 Route::get('{page}/{subs?}', ['uses' => 'PageController@index'])

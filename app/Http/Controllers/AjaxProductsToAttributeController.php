@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Product;
+use App\Models\ProductsAttributesValue;
 use App\Models\ProductsToAttributes;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,20 @@ class AjaxProductsToAttributeController extends Controller
         ob_start();
         if(ProductsToAttributes::find($id)->delete())
             echo 'done';
+        ob_end_flush();
+        die;
+    }
+
+    public function actionGetAttributeValues(Request $request)
+    {
+
+        $values = ProductsAttributesValue::where(['product_attributes_id' => $request->val])->get();
+
+        header('Content-Type: text/html; charset=utf-8');
+        ob_start();
+        if($values)
+            foreach ($values as $value)
+                echo '<option value="' . $value->id . '">' . $value->value  . '</option>';
         ob_end_flush();
         die;
     }
