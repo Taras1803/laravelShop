@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5464b2b-2502-4fef-9090-25885bc6ea75" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AjaxProductsToAttributeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AjaxProductsToAttributeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
-    </list>
+    <list default="true" id="f5464b2b-2502-4fef-9090-25885bc6ea75" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,21 +79,21 @@
       <file leaf-file-name="product_attribute.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/backpack/crud/src/resources/views/fields/product_attribute.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="67" column="137" lean-forward="false" selection-start-line="67" selection-start-column="137" selection-end-line="67" selection-end-column="137" />
+            <state relative-caret-position="431">
+              <caret line="63" column="98" lean-forward="false" selection-start-line="63" selection-start-column="98" selection-end-line="63" selection-end-column="98" />
               <folding>
                 <element signature="e#1105#1132#0#HTML" expanded="true" />
                 <element signature="e#1158#1198#0#HTML" expanded="true" />
                 <element signature="e#2375#2402#0#HTML" expanded="true" />
                 <element signature="e#2436#2473#0#HTML" expanded="true" />
-                <element signature="e#2684#2720#0#HTML" expanded="true" />
-                <marker date="1547794637184" expanded="true" signature="9:158" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="9:233" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="9:278" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="9:379" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="9:380" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="13:156" ph="..." />
-                <marker date="1547794637184" expanded="true" signature="321:378" ph="..." />
+                <element signature="e#2705#2741#0#HTML" expanded="true" />
+                <marker date="1547794988966" expanded="true" signature="9:158" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="9:233" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="9:278" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="9:379" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="9:380" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="13:156" ph="..." />
+                <marker date="1547794988966" expanded="true" signature="321:378" ph="..." />
               </folding>
             </state>
           </provider>
@@ -161,7 +158,7 @@
       <file leaf-file-name="AjaxProductsToAttributeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AjaxProductsToAttributeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
+            <state relative-caret-position="782">
               <caret line="46" column="75" lean-forward="false" selection-start-line="46" selection-start-column="75" selection-end-line="46" selection-end-column="75" />
               <folding>
                 <element signature="e#40#65#0#PHP" expanded="true" />
@@ -546,12 +543,12 @@
       <workItem from="1546622314132" duration="80621000" />
       <workItem from="1546892749846" duration="1284000" />
       <workItem from="1546939837446" duration="81357000" />
-      <workItem from="1547456647511" duration="52723000" />
+      <workItem from="1547456647511" duration="53075000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385327000" />
+    <option name="totallyTimeSpent" value="385679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="75" y="141" width="1477" height="960" extended-state="0" />
@@ -1001,7 +998,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AjaxProductsToAttributeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
+        <state relative-caret-position="782">
           <caret line="46" column="75" lean-forward="false" selection-start-line="46" selection-start-column="75" selection-end-line="46" selection-end-column="75" />
           <folding>
             <element signature="e#40#65#0#PHP" expanded="true" />
@@ -1011,21 +1008,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/backpack/crud/src/resources/views/fields/product_attribute.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="67" column="137" lean-forward="false" selection-start-line="67" selection-start-column="137" selection-end-line="67" selection-end-column="137" />
+        <state relative-caret-position="431">
+          <caret line="63" column="98" lean-forward="false" selection-start-line="63" selection-start-column="98" selection-end-line="63" selection-end-column="98" />
           <folding>
             <element signature="e#1105#1132#0#HTML" expanded="true" />
             <element signature="e#1158#1198#0#HTML" expanded="true" />
             <element signature="e#2375#2402#0#HTML" expanded="true" />
             <element signature="e#2436#2473#0#HTML" expanded="true" />
-            <element signature="e#2684#2720#0#HTML" expanded="true" />
-            <marker date="1547794637184" expanded="true" signature="9:158" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="9:233" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="9:278" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="9:379" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="9:380" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="13:156" ph="..." />
-            <marker date="1547794637184" expanded="true" signature="321:378" ph="..." />
+            <element signature="e#2705#2741#0#HTML" expanded="true" />
+            <marker date="1547794988966" expanded="true" signature="9:158" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="9:233" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="9:278" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="9:379" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="9:380" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="13:156" ph="..." />
+            <marker date="1547794988966" expanded="true" signature="321:378" ph="..." />
           </folding>
         </state>
       </provider>
